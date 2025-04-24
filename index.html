@@ -1,0 +1,175 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sanjoe Public School - Student Data Management System 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #00aaff, #005f79);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      font-size: 36px;
+      color: #fff;
+      font-weight: 700;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .circle-container {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .circle {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(135deg, #ff6f61, #ff914d);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.3s ease, background 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .circle:hover {
+      transform: scale(1.2);
+      background: linear-gradient(135deg, #ff4a3f, #ff6f61);
+    }
+    .circle a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      text-align: center;
+    }
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 14px;
+      color: white;
+      text-align: center;
+    }
+    .login {
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background: #ff914d;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+    }
+    .error {
+      color: yellow;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .circle-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Sanjoe Public School - Student Data Management System 2025</h1>
+
+  <div class="login">
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="validate()">Login</button>
+    <div id="error" class="error"></div>
+  </div>
+
+  <div class="circle-container" id="circle-container"></div>
+
+  <div class="footer">
+    &copy; 2025 Sanjoe Public School | All Rights Reserved
+  </div>
+
+  <script>
+    function validate() {
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const errorDiv = document.getElementById("error");
+
+      const match = username.match(/^Teacher(\d{2})$/);
+      if (!match) {
+        errorDiv.innerText = "Incorrect username format.";
+        return;
+      }
+
+      const num = parseInt(match[1]);
+      const expectedPassword = "Sanjoe" + (num + 1);
+
+      if (password === expectedPassword) {
+        loadDashboard();
+        document.querySelector(".login").style.display = "none";
+        errorDiv.innerText = "";
+      } else {
+        errorDiv.innerText = "Incorrect password.";
+      }
+    }
+
+    function loadDashboard() {
+      const links = [
+        { name: "MARK ENTERING", url: "https://script.google.com/macros/s/AKfycbwVzjEpndR58ZFVBPQf_jcodypJZhYvuPeNvwf63kBSxBkh0I-xjk5RO6S6jvZ9vNSgCQ/exec" },
+        { name: "ATTENDANCE", url: "https://script.google.com/macros/s/AKfycbw8-2u2UZEseeVM3KEhXFMoJfaga-FwhrxWkXEazKfK2yjpImXpkIrTkxiuUVuFIcTC/exec" },
+        { name: "CCA", url: "https://script.google.com/macros/s/AKfycbyPSAu9WFxbKYfTSSotmdm40_dW7hDbJFpsmXyvVcPL6M5NF436uQeiSzf5nglXM5uZUQ/exec" },
+        { name: "HPE", url: "https://script.google.com/macros/s/AKfycbzGNfcR8zW0J3Qm7hgH7MjseDHZnOSAswZAXQW0HNM3ATe3DQRgE9uAUphbB2U5YcF2/exec" },
+        { name: "STUDENTS REMARK", url: "https://script.google.com/macros/s/AKfycbx6tWS0R4J87xJWbXMQVTix8yKhxtf2plWVUoxXPWPloW994WqHX4v-faT5PurCUahsmQ/exec" },
+        { name: "VEHICLE", url: "https://script.google.com/macros/s/AKfycbyAhKZRzRu0MrPuVWS2t4-TmiO5eIOElidgMoO9GI4-YVIYkDS0BvK-QS8lr14PcE-J/exec" },
+        { name: "STATISTICAL DATA", url: "https://script.google.com/macros/s/AKfycby8gXWSVp6sydrgW6B5RJD82dPCeHVrmE0ySIsJ8D9TK9zOJFon6jbGv_FteoKwKYfygA/exec" },
+        { name: "REPORTS", url: "https://script.google.com/macros/s/AKfycbxjRe-1m74kMIEqw507J-0ksp7zXSoVmtCd8gd5xKWRZQuVOmSDAJoCPNvHzx5-NwKw5g/exec" },
+        { name: "ISSUE REGISTER", url: "https://script.google.com/macros/s/AKfycbwuIHaEZVMX-8D_v6oeR_A8YdALzfGV6X8AsaOWRq80sjUTlvBtdtV5rGrNCWI8rr8R/exec" },
+        { name: "OTHER", url: "#other" }
+      ];
+
+      const container = document.getElementById("circle-container");
+      container.innerHTML = "";
+      links.forEach(link => {
+        const div = document.createElement("div");
+        div.className = "circle";
+        const a = document.createElement("a");
+        a.href = link.url;
+        a.innerText = link.name;
+        a.target = "_blank";
+        div.appendChild(a);
+        container.appendChild(div);
+      });
+      container.style.display = "flex";
+    }
+  </script>
+
+</body>
+</html>
