@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sanjoe Public School - Admin Panel 2025</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .circle-menu {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    .circle-menu a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      color: white;
+      text-decoration: none;
+      background-image: linear-gradient(to bottom right, #6b7280, #374151);
+      box-shadow: 0 6px 10px -2px rgba(0, 0, 0, 0.3), 0 3px 7px -3px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+      padding: 0.5rem;
+      word-wrap: break-word;
+    }
+
+    .circle-menu a:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 8px -4px rgba(0, 0, 0, 0.3);
+    }
+
+    .circle-menu a:nth-child(1) { background-image: linear-gradient(to bottom right, #6366F1, #A855F7); }
+    .circle-menu a:nth-child(2) { background-image: linear-gradient(to bottom right, #10B981, #06B6D4); }
+    .circle-menu a:nth-child(3) { background-image: linear-gradient(to bottom right, #8B5CF6, #D946EF); }
+    .circle-menu a:nth-child(4) { background-image: linear-gradient(to bottom right, #EC4899, #F472B6); }
+    .circle-menu a:nth-child(5) { background-image: linear-gradient(to bottom right, #F97316, #FB8C00); }
+    .circle-menu a:nth-child(6) { background-image: linear-gradient(to bottom right, #3B82F6, #60A5FA); }
+    .circle-menu a:nth-child(7) { background-image: linear-gradient(to bottom right, #84CC16, #A3E635); }
+    .circle-menu a:nth-child(8) { background-image: linear-gradient(to bottom right, #EF4444, #F87171); }
+    .circle-menu a:nth-child(9) { background-image: linear-gradient(to bottom right, #F43F5E, #F9A8D4); }
+    .circle-menu a:nth-child(10) { background-image: linear-gradient(to bottom right, #22C55E, #6EE7B7); }
+
+    .footer {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 768px) {
+      .circle-menu a {
+        width: 150px;
+        height: 150px;
+        font-size: 1rem;
+      }
+      .circle-menu {
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .circle-menu a {
+        width: 90%;
+        height: auto;
+        aspect-ratio: 1;
+        font-size: 0.9rem;
+        padding: 0.75rem;
+      }
+      .circle-menu {
+        gap: 1rem;
+      }
+    }
+
+    body {
+      background: linear-gradient(to bottom, #1e3a8a, #2563eb, #1e40af);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .loader-container {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: auto;
+      margin-bottom: 30px;
+    }
+
+    .loader {
+      width: 100%;
+      height: 100%;
+      border: 10px solid rgba(255, 255, 255, 0.2);
+      border-top: 10px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite, glowPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        box-shadow: 0 0 10px #fff, 0 0 20px #38bdf8;
+      }
+      50% {
+        box-shadow: 0 0 20px #fff, 0 0 40px #0ea5e9;
+      }
+    }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+      color: white;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 span {
+      font-weight: 800;
+      color: #ff5a5f;
+    }
+  </style>
+</head>
+<body class="font-inter antialiased">
+  <div class="container mx-auto px-4 py-8">
+    <!-- Spinner with emblem -->
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+
+    <h1>
+      🎓 Sanjoe Public School – Admin Panel <span>2025</span> 🎯
+    </h1>
+
+    <div class="circle-menu">
+      <a href="#">MARK ENTERING</a>
+      <a href="https://script.google.com/macros/s/AKfycbzy3psqPiVZh9PstlL0PdghJzVID9eyNEr4bZ7DE935gtvBnwKuLMy1hqt-MvL39SJQTA/exec?page=AdminAttendance">ATTENDANCE</a>
+      <a href="#">CCA</a>
+      <a href="#">HPE</a>
+      <a href="#">STUDENTS REMARK</a>
+      <a href="#">VEHICLE</a>
+      <a href="https://script.google.com/macros/s/AKfycbzBVKR0b7XFzR-mFqdf6lcb0gPJWL5k2FiVv3ymFSq1VVk-EhBbIFY-Rkz9NUWhmcMkmA/exec?page=admin">STATISTICAL DATA</a>
+      <a href="#">REPORTS</a>
+      <a href="#">ISSUE REGISTER</a>
+      <a href="https://script.google.com/macros/s/AKfycbwVzjEpndR58ZFVBPQf_jcodypJZhYvuPeNvwf63kBSxBkh0I-xjk5RO6S6jvZ9vNSgCQ/exec?page=adminView">STUDENT VIEW</a>
+    </div>
+
+    <footer class="footer">
+      &copy; 2025 Sanjoe Public School. All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
