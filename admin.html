@@ -7,6 +7,86 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    body {
+      background: linear-gradient(to bottom, #1e3a8a, #2563eb, #1e40af);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .loader-container {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px auto;
+    }
+
+    .loader {
+      width: 100%;
+      height: 100%;
+      border: 10px solid rgba(255, 255, 255, 0.2);
+      border-top: 10px solid #ffffff;
+      border-radius: 50%;
+      animation: spin 1.5s linear infinite, glowPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+
+    @keyframes glowPulse {
+      0%, 100% {
+        box-shadow: 0 0 10px #fff, 0 0 20px #38bdf8;
+      }
+      50% {
+        box-shadow: 0 0 20px #fff, 0 0 40px #0ea5e9;
+      }
+    }
+
+    .login-wrapper {
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .login-wrapper h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1e40af;
+    }
+
+    .login-wrapper input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .login-wrapper button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #3B82F6;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .login-wrapper button:hover {
+      background-color: #2563eb;
+    }
+
     .circle-menu {
       display: flex;
       flex-wrap: wrap;
@@ -36,7 +116,6 @@
 
     .circle-menu a:hover {
       transform: scale(1.1);
-      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 8px -4px rgba(0, 0, 0, 0.3);
     }
 
     .circle-menu a:nth-child(1) { background-image: linear-gradient(to bottom right, #6366F1, #A855F7); }
@@ -57,71 +136,9 @@
       color: #cbd5e1;
     }
 
-    @media (max-width: 768px) {
-      .circle-menu a {
-        width: 150px;
-        height: 150px;
-        font-size: 1rem;
-      }
-      .circle-menu {
-        gap: 1.5rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .circle-menu a {
-        width: 90%;
-        height: auto;
-        aspect-ratio: 1;
-        font-size: 0.9rem;
-        padding: 0.75rem;
-      }
-      .circle-menu {
-        gap: 1rem;
-      }
-    }
-
-    body {
-      background: linear-gradient(to bottom, #1e3a8a, #2563eb, #1e40af);
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-
-    .loader-container {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      margin: auto;
-      margin-bottom: 30px;
-    }
-
-    .loader {
-      width: 100%;
-      height: 100%;
-      border: 10px solid rgba(255, 255, 255, 0.2);
-      border-top: 10px solid #ffffff;
-      border-radius: 50%;
-      animation: spin 1.5s linear infinite, glowPulse 2s ease-in-out infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
-    }
-
-    @keyframes glowPulse {
-      0%, 100% {
-        box-shadow: 0 0 10px #fff, 0 0 20px #38bdf8;
-      }
-      50% {
-        box-shadow: 0 0 20px #fff, 0 0 40px #0ea5e9;
-      }
-    }
-
     h1 {
-      font-family: 'Inter', sans-serif;
       font-weight: 700;
-      font-size: 3rem;
+      font-size: 3.5rem;
       color: white;
       text-align: center;
       margin-bottom: 2rem;
@@ -133,33 +150,63 @@
     }
   </style>
 </head>
-<body class="font-inter antialiased">
-  <div class="container mx-auto px-4 py-8">
-    <!-- Spinner with emblem -->
+<body>
+  <!-- Login Section -->
+  <div id="login-section" class="flex flex-col items-center">
     <div class="loader-container">
       <div class="loader"></div>
     </div>
+    <div class="login-wrapper">
+      <h2>Admin Login</h2>
+      <form id="login-form">
+        <input type="number" id="username" placeholder="Username (6-digit)" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
 
-    <h1>
-      🎓 Sanjoe Public School – Admin Panel <span>2025</span> 🎯
-    </h1>
-
+  <!-- Admin Panel (hidden initially) -->
+  <div id="admin-panel" class="container mx-auto px-4 py-8" style="display: none;">
+    <h1>🎓 Sanjoe Public School – Admin Panel <span>2025</span> 🎯</h1>
     <div class="circle-menu">
       <a href="#">MARK ENTERING</a>
-      <a href="https://script.google.com/macros/s/AKfycbzy3psqPiVZh9PstlL0PdghJzVID9eyNEr4bZ7DE935gtvBnwKuLMy1hqt-MvL39SJQTA/exec?page=AdminAttendance">ATTENDANCE</a>
+      <a href="https://script.google.com/macros/s/.../exec?page=AdminAttendance">ATTENDANCE</a>
       <a href="#">CCA</a>
       <a href="#">HPE</a>
       <a href="#">STUDENTS REMARK</a>
       <a href="#">VEHICLE</a>
-      <a href="https://script.google.com/macros/s/AKfycbzBVKR0b7XFzR-mFqdf6lcb0gPJWL5k2FiVv3ymFSq1VVk-EhBbIFY-Rkz9NUWhmcMkmA/exec?page=admin">STATISTICAL DATA</a>
+      <a href="https://script.google.com/macros/s/.../exec?page=admin">STATISTICAL DATA</a>
       <a href="#">REPORTS</a>
       <a href="#">ISSUE REGISTER</a>
-      <a href="https://script.google.com/macros/s/AKfycbwVzjEpndR58ZFVBPQf_jcodypJZhYvuPeNvwf63kBSxBkh0I-xjk5RO6S6jvZ9vNSgCQ/exec?page=adminView">STUDENT VIEW</a>
+      <a href="https://script.google.com/macros/s/.../exec?page=adminView">STUDENT VIEW</a>
     </div>
-
-    <footer class="footer">
-      &copy; 2025 Sanjoe Public School. All rights reserved.
-    </footer>
+    <footer class="footer">&copy; 2025 Sanjoe Public School. All rights reserved.</footer>
   </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const expectedPassword = (parseInt(username) + 1).toString();
+
+      if (password === expectedPassword) {
+        // Show loader
+        document.getElementById('login-section').innerHTML = `
+          <div class="loader-container">
+            <div class="loader"></div>
+          </div>
+        `;
+        // Delay before showing admin panel
+        setTimeout(function () {
+          document.getElementById('login-section').style.display = 'none';
+          document.getElementById('admin-panel').style.display = 'block';
+        }, 2000);
+      } else {
+        alert('Invalid username or password.');
+      }
+    });
+  </script>
 </body>
 </html>
