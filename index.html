@@ -14,11 +14,12 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Center content vertically */
+            align-items: center; /* Center content horizontally */
             min-height: 100vh; /* Ensure full viewport height */
-            overflow: hidden;
+            /* overflow: hidden; */ /* Removed to enable scrolling */
             position: relative; /* For the animated background */
+            text-align: center; /* Center text within body elements */
         }
 
         /* Animated Background Circles */
@@ -68,7 +69,6 @@
         }
 
         h1 {
-            text-align: center;
             margin-bottom: 30px;
             font-size: 2.5em;
             color: #fff;
@@ -84,6 +84,9 @@
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(10px);
             z-index: 10; /* Ensure it's above the background circles */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         input[type="text"],
@@ -118,7 +121,6 @@
             color: #ffeb3b; /* Yellow */
             font-weight: bold;
             margin-top: 10px;
-            text-align: center;
         }
 
         .circle-container {
@@ -139,7 +141,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
             font-size: 1em;
             font-weight: 600;
             color: white;
@@ -159,7 +160,6 @@
             color: white;
             text-decoration: none;
             font-size: 1em;
-            text-align: center;
         }
 
         .circle.glow {
@@ -171,11 +171,13 @@
             bottom: 20px;
             font-size: 0.9em;
             color: rgba(255, 255, 255, 0.7);
-            text-align: center;
-            z-index: 10; /* Ensure it's above the background circles */
+            width: 100%; /* Ensure full width for centering */
         }
 
         @media (max-width: 768px) {
+            body {
+                overflow-y: auto; /* Allow vertical scrolling on mobile */
+            }
             h1 {
                 font-size: 2em;
                 margin-bottom: 20px;
