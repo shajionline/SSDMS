@@ -1,188 +1,302 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sanjoe Public School - Student Data Management System 2025</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to right, #00aaff, #005f79);
-      color: #fff;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-      font-size: 36px;
-      color: #fff;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    .circle-container {
-      display: none;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-top: 30px;
-    }
-    .circle {
-      width: 170px;
-      height: 170px;
-      background: linear-gradient(135deg, #ff7e5f, #feb47b, #ff6e7f);
-      background-size: 200% 200%;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: white;
-      cursor: pointer;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-decoration: none;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-    .circle:hover {
-      transform: scale(1.1);
-    }
-    .circle a {
-      color: white;
-      text-decoration: none;
-      font-size: 16px;
-      text-align: center;
-    }
-    .circle.glow {
-      box-shadow: 0 0 25px 10px rgba(255, 255, 0, 0.7);
-    }
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 14px;
-      color: white;
-      text-align: center;
-    }
-    .login {
-      text-align: center;
-    }
-    input {
-      padding: 10px;
-      margin: 10px;
-      font-size: 16px;
-      border: none;
-      border-radius: 5px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background: #ff914d;
-      border: none;
-      border-radius: 5px;
-      color: white;
-      font-weight: bold;
-    }
-    .error {
-      color: yellow;
-      font-weight: bold;
-    }
-    @media (max-width: 768px) {
-      .circle-container {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjoe Public School - Student Data Management System 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a1b9a, #c82333); /* Deep purple to vibrant red */
+            color: #f8f9fa; /* Light text for better contrast */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensure full viewport height */
+            overflow: hidden;
+            position: relative; /* For the animated background */
+        }
+
+        /* Animated Background Circles */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: pulse 4s infinite alternate;
+        }
+
+        .bg-circle:nth-child(1) {
+            width: 150px;
+            height: 150px;
+            background-color: #00bcd4; /* Cyan */
+            top: 10%;
+            left: 15%;
+            animation-delay: 0.5s;
+        }
+
+        .bg-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            background-color: #ffc107; /* Amber */
+            top: 70%;
+            right: 20%;
+            animation-delay: 1.5s;
+        }
+
+        .bg-circle:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            background-color: #4caf50; /* Green */
+            bottom: 15%;
+            left: 35%;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            color: #fff;
+            font-weight: 700;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+            letter-spacing: 1px;
+        }
+
+        .login {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            z-index: 10; /* Ensure it's above the background circles */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            width: 250px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+
+        button {
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            background: #ff6f61; /* Coral */
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #e040fb; /* Electric Purple */
+        }
+
+        .error {
+            color: #ffeb3b; /* Yellow */
+            font-weight: bold;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .circle-container {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            z-index: 10; /* Ensure it's above the background circles */
+        }
+
+        .circle {
+            width: 200px; /* Increased width */
+            height: 200px; /* Increased height */
+            background: linear-gradient(135deg, #43a047, #1e88e5, #c2185b); /* Gradient of Green, Blue, Pink */
+            background-size: 300% 300%;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 1em;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 4s ease-in-out;
+            text-decoration: none;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .circle:hover {
+            transform: scale(1.05);
+            background-position: 100% 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .circle a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .circle.glow {
+            box-shadow: 0 0 30px 15px rgba(255, 235, 59, 0.8); /* Glowing yellow */
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+            z-index: 10; /* Ensure it's above the background circles */
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+            .login {
+                padding: 20px;
+            }
+            input[type="text"],
+            input[type="password"] {
+                width: 200px;
+                font-size: 0.9em;
+                margin: 10px 0;
+            }
+            button {
+                font-size: 0.9em;
+                padding: 10px 20px;
+            }
+            .circle-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                margin-top: 30px;
+            }
+            .circle {
+                width: 150px; /* Adjusted for smaller screens */
+                height: 150px; /* Adjusted for smaller screens */
+                font-size: 0.9em;
+            }
+            .footer {
+                font-size: 0.8em;
+            }
+            .bg-circle {
+                opacity: 0.4; /* Less prominent on smaller screens */
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <h1>Sanjoe Public School - Student Data Management System 2025</h1>
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
+    <div class="bg-circle"></div>
 
-  <div class="login">
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="validate()">Login</button>
-    <div id="error" class="error"></div>
-  </div>
+    <h1>Sanjoe Public School - Student Data Management System 2025</h1>
 
-  <div class="circle-container" id="circle-container"></div>
+    <div class="login">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="validate()">Login</button>
+        <div id="error" class="error"></div>
+    </div>
 
-  <div class="footer">
-    &copy; 2025 Sanjoe Public School | All Rights Reserved
-  </div>
+    <div class="circle-container" id="circle-container"></div>
 
-  <script>
-    function validate() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-      const errorDiv = document.getElementById("error");
+    <div class="footer">
+        &copy; 2025 Sanjoe Public School | All Rights Reserved
+    </div>
 
-      const match = username.match(/^Teacher(\d{2})$/);
-      if (!match) {
-        errorDiv.innerText = "Incorrect username format.";
-        return;
-      }
+    <script>
+        function validate() {
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorDiv = document.getElementById("error");
 
-      const num = parseInt(match[1]);
-      const expectedPassword = "Sanjoe" + (num + 1);
+            const match = username.match(/^Teacher(\d{2})$/);
+            if (!match) {
+                errorDiv.innerText = "Incorrect username format.";
+                return;
+            }
 
-      if (password === expectedPassword) {
-        loadDashboard();
-        document.querySelector(".login").style.display = "none";
-        errorDiv.innerText = "";
-      } else {
-        errorDiv.innerText = "Incorrect password.";
-      }
-    }
+            const num = parseInt(match[1]);
+            const expectedPassword = "Sanjoe" + (num + 1);
 
-    function loadDashboard() {
-      const links = [
-        { name: "MARK ENTERING", url: "https://script.google.com/macros/s/AKfycbwVzjEpndR58ZFVBPQf_jcodypJZhYvuPeNvwf63kBSxBkh0I-xjk5RO6S6jvZ9vNSgCQ/exec" },
-        { name: "ATTENDANCE", url: "https://script.google.com/macros/s/AKfycbzy3psqPiVZh9PstlL0PdghJzVID9eyNEr4bZ7DE935gtvBnwKuLMy1hqt-MvL39SJQTA/exec" },
-        { name: "CCA", url: "https://script.google.com/macros/s/AKfycbyPSAu9WFxbKYfTSSotmdm40_dW7hDbJFpsmXyvVcPL6M5NF436uQeiSzf5nglXM5uZUQ/exec" },
-        { name: "HPE", url: "https://script.google.com/macros/s/AKfycbyKAKHSkUSZzA2c329YgWWy-Mv0OAN7nGGRAMHGVk9_-CYEkuigJRqcPp4EP5qC1rTs/exec" },
-        { name: "STUDENTS REMARK", url: "https://script.google.com/macros/s/AKfycbx6tWS0R4J87xJWbXMQVTix8yKhxtf2plWVUoxXPWPloW994WqHX4v-faT5PurCUahsmQ/exec" },
-        { name: "VEHICLE", url: "https://script.google.com/macros/s/AKfycbyAhKZRzRu0MrPuVWS2t4-TmiO5eIOElidgMoO9GI4-YVIYkDS0BvK-QS8lr14PcE-J/exec" },
-        { name: "STATISTICAL DATA", url: "https://script.google.com/macros/s/AKfycbzBVKR0b7XFzR-mFqdf6lcb0gPJWL5k2FiVv3ymFSq1VVk-EhBbIFY-Rkz9NUWhmcMkmA/exec" },
-        { name: "REPORTS", url: "https://script.google.com/macros/s/AKfycbzqfqtJLEpdpvW6lxoiQNO5JpOVTQWWn4FbJpZvAxKPedpVM-JmLC1F70Vt9JpH9jUUng/exec" },
-        { name: "ISSUE REGISTER", url: "https://script.google.com/macros/s/AKfycbwuIHaEZVMX-8D_v6oeR_A8YdALzfGV6X8AsaOWRq80sjUTlvBtdtV5rGrNCWI8rr8R/exec" },
-        { name: "LEAVE REQUEST", url: "#" },
-        { name: "OTHER", url: "#other" }
-      ];
+            if (password === expectedPassword) {
+                loadDashboard();
+                document.querySelector(".login").style.display = "none";
+                errorDiv.innerText = "";
+            } else {
+                errorDiv.innerText = "Incorrect password.";
+            }
+        }
 
-      const container = document.getElementById("circle-container");
-      container.innerHTML = "";
+        function loadDashboard() {
+            const links = [
+                { name: "MARK ENTERING", url: "https://script.google.com/macros/s/AKfycbwVzjEpndR58ZFVBPQf_jcodypJZhYvuPeNvwf63kBSxBkh0I-xjk5RO6S6jvZ9vNSgCQ/exec" },
+                { name: "ATTENDANCE", url: "https://script.google.com/macros/s/AKfycbzy3psqPiVZh9PstlL0PdghJzVID9eyNEr4bZ7DE935gtvBnwKuLMy1hqt-MvL39SJQTA/exec" },
+                { name: "CCA", url: "https://script.google.com/macros/s/AKfycbyPSAu9WFxbKYfTSSotmdm40_dW7hDbJFpsmXyvVcPL6M5NF436uQeiSzf5nglXM5uZUQ/exec" },
+                { name: "HPE", url: "https://script.google.com/macros/s/AKfycbyKAKHSkUSZzA2c329YgWWy-Mv0OAN7nGGRAMHGVk9_-CYEkuigJRqcPp4EP5qC1rTs/exec" },
+                { name: "STUDENTS REMARK", url: "https://script.google.com/macros/s/AKfycbx6tWS0R4J87xJWbXMQVTix8yKhxtf2plWVUoxXPWPloW994WqHX4v-faT5PurCUahsmQ/exec" },
+                { name: "VEHICLE", url: "https://script.google.com/macros/s/AKfycbyAhKZRzRu0MrPuVWS2t4-TmiO5eIOElidgMoO9GI4-YVIYkDS0BvK-QS8lr14PcE-J/exec" },
+                { name: "STATISTICAL DATA", url: "https://script.google.com/macros/s/AKfycbzBVKR0b7XFzR-mFqdf6lcb0gPJWL5k2FiVv3ymFSq1VVk-EhBbIFY-Rkz9NUWhmcMkmA/exec" },
+                { name: "REPORTS", url: "https://script.google.com/macros/s/AKfycbzqfqtJLEpdpvW6lxoiQNO5JpOVTQWWn4FbJpZvAxKPedpVM-JmLC1F70Vt9JpH9jUUng/exec" },
+                { name: "ISSUE REGISTER", url: "https://script.google.com/macros/s/AKfycbwuIHaEZVMX-8D_v6oeR_A8YdALzfGV6X8AsaOWRq80sjUTlvBtdtV5rGrNCWI8rr8R/exec" },
+                { name: "LEAVE REQUEST", url: "#" },
+                { name: "OTHER", url: "#other" }
+            ];
 
-      links.forEach(link => {
-        const div = document.createElement("div");
-        div.className = "circle";
-        const a = document.createElement("a");
-        a.href = link.url;
-        a.innerText = link.name;
-        a.target = "_blank";
-        div.appendChild(a);
+            const container = document.getElementById("circle-container");
+            container.innerHTML = "";
 
-        // On click, glow the circle
-        div.onclick = () => {
-          document.querySelectorAll(".circle").forEach(c => c.classList.remove("glow"));
-          div.classList.add("glow");
-        };
+            links.forEach(link => {
+                const div = document.createElement("div");
+                div.className = "circle";
+                const a = document.createElement("a");
+                a.href = link.url;
+                a.innerText = link.name;
+                a.target = "_blank";
+                div.appendChild(a);
 
-        container.appendChild(div);
-      });
+                // On click, glow the circle
+                div.onclick = () => {
+                    document.querySelectorAll(".circle").forEach(c => c.classList.remove("glow"));
+                    div.classList.add("glow");
+                };
 
-      container.style.display = "flex";
-    }
-  </script>
+                container.appendChild(div);
+            });
+
+            container.style.display = "flex";
+        }
+    </script>
 
 </body>
 </html>
