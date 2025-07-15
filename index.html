@@ -89,8 +89,7 @@
             align-items: center;
         }
 
-        input[type="text"],
-        input[type="password"] {
+        input[type="number"] { /* Changed type to number for PIN */
             padding: 12px;
             margin: 15px 0;
             font-size: 1em;
@@ -99,6 +98,13 @@
             width: 250px;
             background-color: rgba(255, 255, 255, 0.8);
             color: #333;
+            -moz-appearance: textfield; /* Hide arrows for Firefox */
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0; /* Hide arrows for Chrome, Safari, Edge */
         }
 
         button {
@@ -185,8 +191,7 @@
             .login {
                 padding: 20px;
             }
-            input[type="text"],
-            input[type="password"] {
+            input[type="number"] { /* Adjusted for smaller screens */
                 width: 200px;
                 font-size: 0.9em;
                 margin: 10px 0;
@@ -224,8 +229,7 @@
     <h1>Sanjoe Public School - Student Data Management System 2025</h1>
 
     <div class="login">
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
+        <input type="number" id="pinNumber" placeholder="Pin Number">
         <button onclick="validate()">Login</button>
         <div id="error" class="error"></div>
     </div>
@@ -238,25 +242,17 @@
 
     <script>
         function validate() {
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
+            const pinNumber = document.getElementById("pinNumber").value.trim();
             const errorDiv = document.getElementById("error");
 
-            const match = username.match(/^Teacher(\d{2})$/);
-            if (!match) {
-                errorDiv.innerText = "Incorrect username format.";
-                return;
-            }
+            const correctPin = "930992"; // The fixed PIN number
 
-            const num = parseInt(match[1]);
-            const expectedPassword = "Sanjoe" + (num + 1);
-
-            if (password === expectedPassword) {
+            if (pinNumber === correctPin) {
                 loadDashboard();
                 document.querySelector(".login").style.display = "none";
                 errorDiv.innerText = "";
             } else {
-                errorDiv.innerText = "Incorrect password.";
+                errorDiv.innerText = "Incorrect Pin Number.";
             }
         }
 
