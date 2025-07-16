@@ -17,9 +17,9 @@
             justify-content: center; /* Center content vertically */
             align-items: center; /* Center content horizontally */
             min-height: 100vh; /* Ensure full viewport height */
-            /* overflow: hidden; */ /* Removed to enable scrolling */
             position: relative; /* For the animated background */
             text-align: center; /* Center text within body elements */
+            overflow-y: auto; /* Allow vertical scrolling on mobile */
         }
 
         /* Animated Background Circles */
@@ -154,6 +154,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-position 4s ease-in-out;
             text-decoration: none;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative; /* For sub-circles positioning */
         }
 
         .circle:hover {
@@ -166,14 +167,64 @@
             color: white;
             text-decoration: none;
             font-size: 1em;
+            text-align: center;
         }
 
         .circle.glow {
             box-shadow: 0 0 30px 15px rgba(255, 235, 59, 0.8); /* Glowing yellow */
         }
 
-        .footer {
+        .sub-circle-container {
+            display: none; /* Hidden by default */
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            flex-direction: column; /* Stack vertically for sub-circles */
+            gap: 15px;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 20; /* Above parent circle */
+        }
+
+        .sub-circle-container.show {
+            display: flex;
+        }
+
+        .sub-circle {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #007bff, #6610f2); /* Blue to Purple gradient */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .sub-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .sub-circle a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .footer {
+            position: relative; /* Changed from absolute for better mobile flow */
+            margin-top: 40px; /* Add margin to separate from circles */
             bottom: 20px;
             font-size: 0.9em;
             color: rgba(255, 255, 255, 0.7);
@@ -181,9 +232,6 @@
         }
 
         @media (max-width: 768px) {
-            body {
-                overflow-y: auto; /* Allow vertical scrolling on mobile */
-            }
             h1 {
                 font-size: 2em;
                 margin-bottom: 20px;
@@ -211,11 +259,22 @@
                 height: 150px; /* Adjusted for smaller screens */
                 font-size: 0.9em;
             }
-            .footer {
+            .sub-circle-container {
+                position: static; /* Allow sub-circles to flow naturally on mobile */
+                transform: none;
+                margin-top: 15px; /* Add some space above sub-circles */
+            }
+            .sub-circle {
+                width: 100px;
+                height: 100px;
                 font-size: 0.8em;
             }
+            .footer {
+                font-size: 0.8em;
+                margin-top: 30px;
+            }
             .bg-circle {
-                opacity: 0.4; /* Less prominent on smaller screens */
+                opacity: 0.3; /* Less prominent on smaller screens */
             }
         }
     </style>
@@ -268,7 +327,14 @@
                 { name: "REPORTS", url: "https://script.google.com/macros/s/AKfycbzydSZf5G2FUoWagM9lDvu41XhF-RUvNNvfck-Ofl1bkwaQ2x1v7zxlNkcxMVwpLPCwaw/exec" },
                 { name: "CLUB REGISTRATION", url: "https://script.google.com/macros/s/AKfycbyofX2xqvgAPsDBi0-gpg2Jr4CzdP1Nd2z-C5gh0Z05WbPcRp4Hr_vfSxguMHmIaz1Dzg/exec" },
                 { name: "TRAINING REPORT", url: "https://script.google.com/macros/s/AKfycbwra5lkj7CjQI5w9a0NhdP3jCkXiK7_4L9D-MOZ8a0mEWNgj7dCVLkhobVHXEaukPqKFQ/exec" },
-                { name: "TEACHER REGISTRATION", url: "https://script.google.com/macros/s/AKfycby-KxEUuy71LxG24uXnGRo6lhVCIE-8satvAxdlm8rB_AdOFwK8AHpFjfwNdzPNRSJV/exec" }
+                { name: "TEACHER REGISTRATION", url: "https://script.google.com/macros/s/AKfycby-KxEUuy71LxG24uXnGRo6lhVCIE-8satvAxdlm8rB_AdOFwK8AHpFjfwNdzPNRSJV/exec" },
+                {
+                    name: "ARTS",
+                    subLinks: [
+                        { name: "REGISTRATION", url: "https://script.google.com/macros/s/AKfycby7ePLAZqDJc2attkd9PoOIH5SayVN9FqO56oLp3ZRmOlOub_E-Wpakt9-vCft4EhQl/exec" },
+                        { name: "ADMIN", url: "https://script.google.com/macros/s/AKfycbygWVcNfQs1-v9Ry0GBau0wBDE104rkp24-sL823s2NHfQ8Tde1EWqgOHt7zGW1ow67/exec" }
+                    ]
+                }
             ];
 
             const container = document.getElementById("circle-container");
@@ -277,18 +343,70 @@
             links.forEach(link => {
                 const div = document.createElement("div");
                 div.className = "circle";
-                const a = document.createElement("a");
-                a.href = link.url;
-                a.innerText = link.name;
-                a.target = "_blank";
-                div.appendChild(a);
+                
+                if (link.subLinks) {
+                    // This is the ARTS circle with sub-links
+                    const span = document.createElement("span");
+                    span.innerText = link.name;
+                    div.appendChild(span);
 
-                // On click, glow the circle
-                div.onclick = () => {
-                    document.querySelectorAll(".circle").forEach(c => c.classList.remove("glow"));
-                    div.classList.add("glow");
-                };
+                    const subContainer = document.createElement("div");
+                    subContainer.className = "sub-circle-container";
 
+                    link.subLinks.forEach(subLink => {
+                        const subDiv = document.createElement("div");
+                        subDiv.className = "sub-circle";
+                        const subA = document.createElement("a");
+                        subA.href = subLink.url;
+                        subA.innerText = subLink.name;
+                        subA.target = "_blank";
+                        subDiv.appendChild(subA);
+                        subContainer.appendChild(subDiv);
+
+                         // Add glow effect to sub-circle on click
+                        subDiv.onclick = (event) => {
+                            event.stopPropagation(); // Prevent parent circle click from triggering
+                            document.querySelectorAll(".circle, .sub-circle").forEach(c => c.classList.remove("glow"));
+                            subDiv.classList.add("glow");
+                        };
+                    });
+                    div.appendChild(subContainer);
+
+                    // Toggle sub-circles on parent circle click
+                    div.onclick = () => {
+                        // Remove glow from all circles
+                        document.querySelectorAll(".circle, .sub-circle").forEach(c => c.classList.remove("glow"));
+                        // Add glow to the clicked parent circle
+                        div.classList.add("glow");
+
+                        // Toggle visibility of sub-circles for this parent
+                        subContainer.classList.toggle("show");
+                        // Hide other sub-circle containers if any are open
+                        document.querySelectorAll(".sub-circle-container").forEach(otherSubContainer => {
+                            if (otherSubContainer !== subContainer) {
+                                otherSubContainer.classList.remove("show");
+                            }
+                        });
+                    };
+
+                } else {
+                    // Regular circles
+                    const a = document.createElement("a");
+                    a.href = link.url;
+                    a.innerText = link.name;
+                    a.target = "_blank";
+                    div.appendChild(a);
+
+                    // On click, glow the circle
+                    div.onclick = () => {
+                        document.querySelectorAll(".circle, .sub-circle").forEach(c => c.classList.remove("glow"));
+                        div.classList.add("glow");
+                        // Hide any open sub-circle containers when clicking a regular circle
+                        document.querySelectorAll(".sub-circle-container").forEach(subContainer => {
+                            subContainer.classList.remove("show");
+                        });
+                    };
+                }
                 container.appendChild(div);
             });
 
