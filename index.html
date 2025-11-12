@@ -310,7 +310,20 @@
 
         function loadDashboard() {
             const links = [
-                { name: "MARK ENTERING", url: "https://script.google.com/macros/s/AKfycbw3yZaGador4PHAnOFw9fP-vkg98u0ZWolZ98kTR8FR4S-6VhNRk-c4ithcyPzBizaO4w/exec" },
+                // MARK ENTERING is now a parent link with subLinks
+                { 
+                    name: "MARK ENTERING", 
+                    subLinks: [
+                        { 
+                            name: "MARK ENTRY", 
+                            url: "https://script.google.com/macros/s/AKfycbw3yZaGador4PHAnOFw9fP-vkg98u0ZWolZ98kTR8FR4S-6VhNRk-c4ithcyPzBizaO4w/exec" // Existing link
+                        },
+                        { 
+                            name: "PROGRESS REPORT", 
+                            url: "https://script.google.com/macros/s/AKfycbwakYNP7IwYb0euU8dWhXQmeevnvo2wfOO4DJZVmHhgHX2xQKtcmf-HI_l8dSkF0L4BTA/exec" // New link
+                        }
+                    ]
+                },
                 { name: "ATTENDANCE", url: "https://script.google.com/macros/s/AKfycbyMrdIs9ajoQCBn_RlqaIbj1eJiP10cy4Ec0HpI41zY0gI8_bebUWqU9MeWjEy1m5MdHg/exec" },
                 { name: "CCA", url: "https://script.google.com/macros/s/AKfycbypabxhmjvZrgHmazLIusGnuZQyiSEXx4KsihJIYXOvdYHNPAmVIEjw53dqTMvxIrNcGw/exec" },
                 { name: "HPE", url: "https://script.google.com/macros/s/AKfycbwcOivTIZb-igvaNn2AgNf7nXgpGu6jM4sAIKmtOiNIE9ywZTUgHgwhBGOTSyxCZiUv/exec" },
@@ -342,7 +355,7 @@
                 div.className = "circle";
                 
                 if (link.subLinks) {
-                    // This is the ARTS circle with sub-links
+                    // This is a parent circle with sub-links (MARK ENTERING or ARTS)
                     const span = document.createElement("span");
                     span.innerText = link.name;
                     div.appendChild(span);
@@ -413,4 +426,3 @@
 
 </body>
 </html>
-
